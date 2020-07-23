@@ -2,43 +2,60 @@
 Input: a List of integers
 Returns: a List of integers
 '''
-def multiply_num(myArr):
-    if len(myArr) == 0:
-        return 1
-    else:
-        product = 1
-        for el in myArr:
-            product = product * el
-        return product
+# def multiply_num(myArr):
+#     if len(myArr) == 0:
+#         return 1
+#     else:
+#         product = 1
+#         for el in myArr:
+#             product = product * el
+#         return product
+
+# def product_of_all_other_numbers(arr):
+#     # Your code here
+#     multiple = []
+
+#     if len(arr) == 2:
+#         arr[0], arr[1] = arr[1], arr[0]
+#         return arr
+
+#     for i in range(0, len(arr)):
+#         if i == 0:
+#             right = arr[(i+1):]
+#             result = multiply_num(right)
+#             multiple.append(result)
+
+#         elif i == len(arr)-1:
+#             left = arr[:(i)]
+#             result = multiply_num(left)
+#             multiple.append(result)
+
+#         else:
+#             left = arr[:(i)]
+#             right = arr[(i+1):]
+#             rest = left + right
+#             result = multiply_num(rest)
+#             multiple.append(result)
+    
+#     return multiple
 
 def product_of_all_other_numbers(arr):
-    # Your code here
-    multiple = []
+    new_arr = [1]
+    length = len(arr)
+    # run forwards through the list muliplying by the cumulative product of the right elements
+    product = 1
+    for i in arr[:-1]:
+        product *= i
+        new_arr.append(product)
+    # run backwards though the list multiplying by the cumulative product of the left elements
+    product = 1
+    # range(start, stop, step)
+    for i in range(length-1, 0, -1):
+        product *= arr[i]
+        new_arr[i-1] *= product
 
-    if len(arr) == 2:
-        arr[0], arr[1] = arr[1], arr[0]
-        return arr
+    return new_arr 
 
-    for i in range(0, len(arr)):
-        if i == 0:
-            right = arr[(i+1):]
-            result = multiply_num(right)
-            multiple.append(result)
-
-        elif i == len(arr)-1:
-            left = arr[:(i)]
-            result = multiply_num(left)
-            multiple.append(result)
-
-        else:
-            left = arr[:(i)]
-            right = arr[(i+1):]
-            rest = left + right
-            result = multiply_num(rest)
-            multiple.append(result)
-    
-    return multiple
-    
 if __name__ == '__main__':
     # Use the main function to test your implementation
     # arr = [1, 2, 3, 4, 5]
