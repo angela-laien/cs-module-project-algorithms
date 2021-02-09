@@ -4,9 +4,22 @@ Returns: an integer
 '''
 def single_number(arr):
     # Your code here
+    # for i in arr:
+    #     if arr.count(i) == 1:
+    #         return i
 
-    pass
-
+    # Improved method
+        counts = {}
+        # iterate through array
+        for num in arr: # 0(n)
+            if num not in counts:
+                counts[num] = 1
+            else:
+                counts[num] += 1
+        
+        for k, v in counts.items():
+            if v == 1:
+                return k
 
 if __name__ == '__main__':
     # Use the main function to test your implementation
